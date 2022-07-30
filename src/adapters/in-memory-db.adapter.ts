@@ -15,26 +15,28 @@ const deserialize = (book: BookPersistenceEntity): Book => {
   return Book.from({ title: book.title, isbn: ISBN.of(book.isbn) });
 };
 
-let inMemoryDatabase: BookPersistenceEntity[] = [
-  { title: "This is a title", isbn: ISBN.of("9999999999999") },
-];
-
 export class InMemoryPersistenceAdapter implements BookRepository {
+  private inMemoryDatabase: BookPersistenceEntity[] = [
+    { title: "This is a title", isbn: ISBN.of("9999999999999") },
+  ];
+
   public async getBookByIsbn(isbn: ISBN): Promise<Book | undefined> {
-    const book = inMemoryDatabase.find((book) => book.isbn === isbn);
+    const book = this.inMemoryDatabase.find((book) => book.isbn === isbn);
     return !book ? undefined : deserialize(book);
   }
 
   public async getBooks() {
-    return [...inMemoryDatabase].map(deserialize);
+    return [...this.inMemoryDatabase].map(deserialize);
   }
 
   public async addBook(book: Book) {
     this.removeBookByIsbn(book.isbn);
-    inMemoryDatabase.push(serialize(book));
+    this.inMemoryDatabase.push(serialize(book));
   }
 
   public async removeBookByIsbn(isbn: ISBN) {
-    inMemoryDatabase = inMemoryDatabase.filter((book) => book.isbn !== isbn);
+    this.inMemoryDatabase = this.inMemoryDatabase.filter(
+      (book) => book.isbn !== isbn
+    );
   }
 }
