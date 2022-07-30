@@ -4,7 +4,8 @@
   "description": "Playground for domain model design",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/main.ts"
+    "start": "ts-node src/main.ts",
+    "tsc": "tsc --init"
   },
   "repository": {
     "type": "git",
