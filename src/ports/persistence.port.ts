@@ -3,14 +3,14 @@ import { ISBN } from "../model/isbn";
 
 export interface BookRepository {
   /** Retrieve a Book by given ISBN. Returns undefined if no book is found. */
-  getBookByIsbn: (isbn: ISBN) => Book | undefined;
+  getBookByIsbn: (isbn: ISBN) => Promise<Book | undefined>;
 
   /** Retrieve all books. */
-  getBooks: () => Book[];
+  getBooks: () => Promise<Book[]>;
 
   /** Add a new Book. */
-  addBook: (book: Book) => void;
+  addBook: (book: Book) => Promise<void>;
 
   /** Delete a Book by given ISBN. */
-  removeBookByIsbn: (isbn: ISBN) => void;
+  removeBookByIsbn: (isbn: ISBN) => Promise<void>;
 }

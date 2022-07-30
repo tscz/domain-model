@@ -20,21 +20,21 @@ let inMemoryDatabase: BookPersistenceEntity[] = [
 ];
 
 export class InMemoryPersistenceAdapter implements BookRepository {
-  public getBookByIsbn(isbn: ISBN): Book | undefined {
+  public async getBookByIsbn(isbn: ISBN): Promise<Book | undefined> {
     const book = inMemoryDatabase.find((book) => book.isbn === isbn);
     return !book ? undefined : deserialize(book);
   }
 
-  public getBooks() {
+  public async getBooks() {
     return [...inMemoryDatabase].map(deserialize);
   }
 
-  public addBook(book: Book) {
+  public async addBook(book: Book) {
     this.removeBookByIsbn(book.isbn);
     inMemoryDatabase.push(serialize(book));
   }
 
-  public removeBookByIsbn(isbn: ISBN) {
+  public async removeBookByIsbn(isbn: ISBN) {
     inMemoryDatabase = inMemoryDatabase.filter((book) => book.isbn !== isbn);
   }
 }
