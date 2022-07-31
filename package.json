@@ -7,7 +7,8 @@
     "start": "ts-node src/main.ts",
     "tsc": "tsc --init",
     "depcruise": "depcruise --init",
-    "arch": "depcruise --config .dependency-cruiser.js --output-type dot src | dot -T svg > dependencygraph.svg"
+    "arch": "depcruise --config .dependency-cruiser.js --output-type dot src | dot -T svg > dependencygraph.svg",
+    "arch:html": "depcruise --config .dependency-cruiser.js --output-type dot src | dot -T svg | depcruise-wrap-stream-in-html > index.html"
   },
   "repository": {
     "type": "git",
