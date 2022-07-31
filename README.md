@@ -3,7 +3,8 @@ This is a playground for designing safe domain models + port/adapter architectur
 
 ```mermaid
 flowchart LR
-subgraph Application 
+
+subgraph  
 subgraph Domain 
     Book-- has exactly one ---ISBN
 
@@ -20,11 +21,14 @@ end
 
 MongoDB[(MongoDB)]
 
+InMemoryDBAdapter-. implements .->BookRepository
+MongoDBAdapter-. implements .->BookRepository
+
 BookRepository-- uses -->Book
 
-BookRepository-. implements .-InMemoryDBAdapter
-BookRepository-. implements .-MongoDBAdapter
-
-InMemoryDBAdapter<-->InMemoryDB
-MongoDBAdapter<-->MongoDB
+InMemoryDBAdapter<-- read/write -->InMemoryDB
+MongoDBAdapter<-- read/write -->MongoDB
 ```
+
+## Generated code dependency graph
+<img src="./dependencygraph.svg" />
