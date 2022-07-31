@@ -31,4 +31,5 @@ MongoDBAdapter<-- read/write -->MongoDB
 ```
 
 ## Generated code dependency graph
+Find interactive version [here](https://tscz.github.io/domain-model/).
 <img src="./dependencygraph.svg" />
